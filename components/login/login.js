@@ -123,7 +123,7 @@ const FirstRoute = () => {
               </View>
 
               <View style={{marginTop: 20}}>
-                <TouchableOpacity style={styles.btn}>
+                <TouchableOpacity style={styles.btn}   >
                   <Text style={styles.btnText}>Login</Text>
                 </TouchableOpacity>
               </View>
