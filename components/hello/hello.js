@@ -82,7 +82,7 @@ btn: {
 });
 export default function hello({navigation}) {
   const navigate = async () => {
- navigation.navigate('welcome')
+ navigation.navigate('home')
   }
   return (
     <>
