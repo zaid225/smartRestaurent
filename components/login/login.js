@@ -109,8 +109,6 @@ const styles = StyleSheet.create({
 export default function login(props) {
   const layout = useWindowDimensions();
 
-  console.warn(props);
-
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {key: 'Login', title: 'Login'},
