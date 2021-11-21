@@ -105,74 +105,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins',
   },
 });
-const FirstRoute = () => {
-  return (
-    <ScrollView
-      keyboardShouldPersistTaps="handled"
-      showsVerticalScrollIndicator={false}>
-      <KeyboardAvoidingView enabled={true} behavior="height" style={{flex: 1}}>
-        <SafeAreaView>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View
-              style={{color: 'black', justifyContent: 'center', marginTop: 25}}>
-              <View>
-                <TextInput style={styles.input} placeholder="Username" />
-              </View>
-              <View style={{marginTop: 20}}>
-                <TextInput style={styles.input} placeholder="Password" />
-              </View>
 
-              <View style={{marginTop: 20}}>
-                <TouchableOpacity style={styles.btn}   >
-                  <Text style={styles.btnText}>Login</Text>
-                </TouchableOpacity>
-              </View>
-              <View></View>
-            </View>
-          </TouchableWithoutFeedback>
-        </SafeAreaView>
-      </KeyboardAvoidingView>
-    </ScrollView>
-  );
-};
-
-const SecondRoute = () => {
-  return (
-    <>
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}>
-        <KeyboardAvoidingView enabled={true} behavior="height">
-          <View
-            style={{color: 'black', justifyContent: 'center', marginTop: 25}}>
-            <View>
-              <TextInput style={styles.input} placeholder="Create a Username" />
-            </View>
-            <View style={{marginTop: 20}}>
-              <TextInput style={styles.input} placeholder="Create a Password" />
-            </View>
-            <View style={{marginTop: 20}}>
-              <TextInput style={styles.input} placeholder="Confirm Password" />
-            </View>
-
-            <View style={{marginTop: 20}}>
-              <TouchableOpacity style={styles.btn}>
-                <Text style={styles.btnText}>Create Account</Text>
-              </TouchableOpacity>
-            </View>
-            <View></View>
-          </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
-    </>
-  );
-};
-
-const renderScene = SceneMap({
-  Login: FirstRoute,
-  Register: SecondRoute,
-});
-export default function login() {
+export default function login(props) {
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
@@ -180,6 +114,75 @@ export default function login() {
     {key: 'Login', title: 'Login'},
     {key: 'Register', title: 'Register'},
   ]);
+
+  const FirstRoute = () => {
+    return (
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}>
+        <KeyboardAvoidingView enabled={true} behavior="height" style={{flex: 1}}>
+          <SafeAreaView>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <View
+                style={{color: 'black', justifyContent: 'center', marginTop: 25}}>
+                <View>
+                  <TextInput style={styles.input} placeholder="Username" />
+                </View>
+                <View style={{marginTop: 20}}>
+                  <TextInput style={styles.input} placeholder="Password" />
+                </View>
+  
+                <View style={{marginTop: 20}}>
+                  <TouchableOpacity style={styles.btn} onPress={()=>{props.navigation.replace("home")}}  >
+                    <Text style={styles.btnText}>Login</Text>
+                  </TouchableOpacity>
+                </View>
+                <View></View>
+              </View>
+            </TouchableWithoutFeedback>
+          </SafeAreaView>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    );
+  };
+  
+  const SecondRoute = () => {
+    return (
+      <>
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}>
+          <KeyboardAvoidingView enabled={true} behavior="height">
+            <View
+              style={{color: 'black', justifyContent: 'center', marginTop: 25}}>
+              <View>
+                <TextInput style={styles.input} placeholder="Create a Username" />
+              </View>
+              <View style={{marginTop: 20}}>
+                <TextInput style={styles.input} placeholder="Create a Password" />
+              </View>
+              <View style={{marginTop: 20}}>
+                <TextInput style={styles.input} placeholder="Confirm Password" />
+              </View>
+  
+              <View style={{marginTop: 20}}>
+                <TouchableOpacity style={styles.btn}>
+                  <Text style={styles.btnText}>Create Account</Text>
+                </TouchableOpacity>
+              </View>
+              <View></View>
+            </View>
+          </KeyboardAvoidingView>
+        </ScrollView>
+      </>
+    );
+  };
+
+  const renderScene = SceneMap({
+    Login: FirstRoute,
+    Register: SecondRoute,
+  });
+
   return (
     <>
       <View style={styles.container}>
