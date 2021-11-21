@@ -10,7 +10,9 @@ import {
   Platform,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard 
+  Keyboard,
+  ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Poppins , sans-serif',
     position: 'absolute',
-    flex: 1,
+    // flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
     bottom: 0,
@@ -61,6 +63,7 @@ const styles = StyleSheet.create({
     left: 0,
     width: '100%',
     flex: 0.5,
+    overflow: 'hidden',
   },
   input: {
     height: 61,
@@ -79,42 +82,91 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     border: 'none',
   },
+  btn: {
+    backgroundColor: '#FFCC63',
+    height: 61,
+    borderWidth: 0,
+    width: '90%',
+    borderRadius: 16,
+    justifyContent: 'center',
+    top: 0,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    fontSize: 18,
+    padding: 4,
+    marginRight: 1,
+    alignSelf: 'center',
+    border: 'none',
+  },
+  btnText: {
+    fontSize: 18,
+    color: '#fff',
+    fontFamily: 'Poppins',
+  },
 });
 const FirstRoute = () => {
   return (
-    <View
-      style={{color: 'black', justifyContent: 'center',marginTop:15}}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View>
-            <TextInput style={styles.input} placeholder="Username" />
+    <ScrollView
+      keyboardShouldPersistTaps="handled"
+      showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView enabled={true} behavior="height" style={{flex: 1}}>
+        <SafeAreaView>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View
+              style={{color: 'black', justifyContent: 'center', marginTop: 25}}>
+              <View>
+                <TextInput style={styles.input} placeholder="Username" />
+              </View>
+              <View style={{marginTop: 20}}>
+                <TextInput style={styles.input} placeholder="Password" />
+              </View>
 
+              <View style={{marginTop: 20}}>
+                <TouchableOpacity style={styles.btn}   >
+                  <Text style={styles.btnText}>Login</Text>
+                </TouchableOpacity>
+              </View>
+              <View></View>
             </View>
-           
-        
-            </TouchableWithoutFeedback>
-           
-        
+          </TouchableWithoutFeedback>
+        </SafeAreaView>
       </KeyboardAvoidingView>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={{marginTop:20}}>
-            <TextInput style={styles.input} placeholder="Password" />
-
-            </View>
-           
-        
-            </TouchableWithoutFeedback>
-           
-        
-      </KeyboardAvoidingView>
-    </View>
+    </ScrollView>
   );
 };
 
-const SecondRoute = () => <View style={{flex: 0}} />;
+const SecondRoute = () => {
+  return (
+    <>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}>
+        <KeyboardAvoidingView enabled={true} behavior="height">
+          <View
+            style={{color: 'black', justifyContent: 'center', marginTop: 25}}>
+            <View>
+              <TextInput style={styles.input} placeholder="Create a Username" />
+            </View>
+            <View style={{marginTop: 20}}>
+              <TextInput style={styles.input} placeholder="Create a Password" />
+            </View>
+            <View style={{marginTop: 20}}>
+              <TextInput style={styles.input} placeholder="Confirm Password" />
+            </View>
+
+            <View style={{marginTop: 20}}>
+              <TouchableOpacity style={styles.btn}>
+                <Text style={styles.btnText}>Create Account</Text>
+              </TouchableOpacity>
+            </View>
+            <View></View>
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </>
+  );
+};
 
 const renderScene = SceneMap({
   Login: FirstRoute,
@@ -132,7 +184,7 @@ export default function login() {
     <>
       <View style={styles.container}>
         <Image style={styles.logo} source={require('../../assets/logo1.png')} />
-        <Text style={styles.mytext}>Smart Restaurant</Text>
+        <Text style={styles.mytext}>Fine Dine</Text>
       </View>
       <View style={styles.container1}>
         <Text style={styles.heading}>Enter your details to login</Text>

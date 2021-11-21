@@ -37,7 +37,7 @@ class Splash extends Component {
   }
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('welcome');
+      this.props.navigation.navigate('hello');
     }, 1000);
   }
   render() {
@@ -50,7 +50,7 @@ class Splash extends Component {
           backgroundColor: 'white',
         }}>
         <Image style={styles.logo} source={require('../../assets/logo1.png')} />
-        <Text style={styles.mytext}>Smart Restaurant</Text>
+        <Text style={styles.mytext}>Fine Dine</Text>
       </View>
     );
   }

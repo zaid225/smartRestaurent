@@ -28,6 +28,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import welcome from './components/welcome/welcome';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import login from './components/login/login';
+import hello from './components/hello/hello';
+import home from './components/home/home';
 
 const Stack = createNativeStackNavigator();
 const styles=StyleSheet.create({
@@ -63,6 +65,12 @@ class App extends Component {
           
         
            }} component={login} />
+           <Stack.Screen name='hello'  component={hello}
+           options={{ headerShown: false }}
+          />
+          <Stack.Screen name='home'  component={home}
+           options={{ headerShown: false }}
+          />
         </Stack.Navigator>
         
       </NavigationContainer>
