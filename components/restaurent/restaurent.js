@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     justifyContent: 'flex-end',
     borderRadius: 5,
-    height: 210,
+    height: 190,
   },
   itemName: {
     fontSize: 16,

@@ -139,7 +139,7 @@ gridView1: {
 itemContainer1: {
   justifyContent: 'flex-end',
   borderRadius: 12,
-  height: 210,
+  height: 190,
   
 },
 itemName1: {
@@ -165,14 +165,14 @@ export default function main() {
     { name: 'Chicken Taste to best Hotel', img: require('../../assets/unsplash_nQYALfQKmK4.png') },
     { name: 'Mughlai Taste in Love Hotel', img: require('../../assets/unsplash_ykThMylLsbY.png') },
     
- 
+  
   ]);
  const  ratingCompleted = (rating) => {
     console.log("Rating is: " + rating)
   }
   return (
     <>
-    <View style={{top:0,flexDirection:'row'}}>
+    <View style={{top:0,flexDirection:'row',marginTop:50}}>
     <View style={styles.container1}>
          <Image style={styles.img}  source={require('../../assets/profile.png')} />
 
