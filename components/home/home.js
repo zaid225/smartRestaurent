@@ -9,7 +9,8 @@ import {Image} from 'react-native'
 import logout from '../logout/logout';
 const Tab = createBottomTabNavigator();
 
-export default function home() {
+export default function home(props) {
+  console.log("props", props)
   return (
     <Tab.Navigator
       initialRouteName="Feed"

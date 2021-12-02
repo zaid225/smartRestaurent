@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -13,8 +13,11 @@ import {
   Keyboard,
   ScrollView,
   TouchableOpacity,
+  AsyncStorage,
+  Alert,
 } from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import axios from './../../server/server';
 
 // import { Container } from './styles';
 const styles = StyleSheet.create({
@@ -115,6 +118,26 @@ export default function login(props) {
     {key: 'Register', title: 'Register'},
   ]);
 
+  const email = useRef('');
+  const password = useRef('');
+
+  const handleSubmit = async () => {
+    if(email.current.length == 0 || password.current.length == 0){
+      Alert.alert("Please enter email and password");
+      return;
+    }
+    const data = { email: email.current, password: password.current };
+    const response = await axios.post("/login", data);
+    console.log("response: ",response);
+    if (response.data.token) {
+      console.log(response);
+      AsyncStorage.setItem("x-access-token", response.data.token);
+      props.navigation.navigate("home")
+    } else {
+      alert("Invalid Email or Password");
+    }
+  }
+
   const FirstRoute = () => {
     return (
       <ScrollView
@@ -126,14 +149,14 @@ export default function login(props) {
               <View
                 style={{color: 'black', justifyContent: 'center', marginTop: 25}}>
                 <View>
-                  <TextInput style={styles.input} placeholder="Username" />
+                  <TextInput style={styles.input} placeholder="Username" onChangeText={(text)=>{email.current = text}} />
                 </View>
                 <View style={{marginTop: 20}}>
-                  <TextInput style={styles.input} placeholder="Password" />
+                  <TextInput style={styles.input} placeholder="Password" onChangeText={(text)=>{password.current = text}} />
                 </View>
   
                 <View style={{marginTop: 20}}>
-                  <TouchableOpacity style={styles.btn} onPress={()=>{props.navigation.replace("home")}}  >
+                  <TouchableOpacity style={styles.btn} onPress={()=>{handleSubmit();}} >
                     <Text style={styles.btnText}>Login</Text>
                   </TouchableOpacity>
                 </View>
@@ -194,7 +217,7 @@ export default function login(props) {
       </View>
 
       <TabView
-        navigationState={{index, routes}}
+        navigationState={{index, routes, props}}
         renderScene={renderScene}
         onIndexChange={setIndex}
         initialLayout={{width: layout.width}}

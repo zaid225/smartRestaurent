@@ -34,7 +34,6 @@ image:{
     justifyContent: 'center',
     position: 'absolute',
     flex: 1,
-    objectFit: 'cover'
 
 },
 container2: {

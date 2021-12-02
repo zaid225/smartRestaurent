@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Image, Text, TouchableOpacity, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { tokenKey } from '../../server/server';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,7 +22,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     flex: 1,
-    objectFit: 'cover',
   },
   container2: {
     width: '100%',
@@ -102,6 +102,9 @@ export default function welcome({navigation}) {
           <TouchableOpacity
             style={styles.btn}
             onPress={() => {
+              AsyncStorage.getItem(tokenKey)?
+              navigation.navigate('home')
+              :
               navigation.navigate('login');
             }}>
             <Icon name="arrow-right" size={30} color="#fff" />
