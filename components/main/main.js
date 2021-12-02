@@ -3,12 +3,13 @@ import React from 'react';
 // import { Container } from './styles';
 import {View,Text,Image,StyleSheet, TouchableOpacity,  FlatList} from 'react-native'
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { SectionGrid } from 'react-native-super-grid';
- 
+import { SectionGrid,FlatGrid } from 'react-native-super-grid';
+import {Rating} from 'react-native-ratings';
 const styles=StyleSheet.create({
 container:{
-  justifyContent:'flex-end',
-  alignItems:'flex-end',
+  // justifyContent:'flex-end',
+  // alignItems:'flex-end',
+  
   
 },
 img:{
@@ -23,9 +24,9 @@ txt:{
   bottom:0,
   textAlign:'justify',
   color:'black',
-  top:0,
-  left:0,
-  marginRight:20
+  top:10,
+  left:25,
+  
   
   
   
@@ -33,7 +34,7 @@ txt:{
 container1:{
   left:17,
   bottom:0,
- top:57
+ top:10
 },
 list:{
 flexDirection:'row',
@@ -68,21 +69,30 @@ borderRadius: 0
 cardTxt1:{
 
   top:10,
-  bordeRadius: null,
+  borderRadius: null,
   fontFamily:'roboto',
   color:'black',
   fontSize:14,
   textAlign:'justify',
-  fontWeight:'bold'
+  fontWeight:'bold',
   
+},
+cardTxt2:{
+  padding:8,
+  fontFamily:'roboto',
+  color:'black',
+  fontSize:13,
+  textAlign:'justify',
+  fontWeight:'bold',
 },
 para1:{
   color:'#fff',
   top:5
 },
 gridView: {
-  marginTop: 20,
-  flex: 1,
+  marginTop: 10,
+  flex: 0,
+  bottom:0
 },
 itemContainer: {
   justifyContent: 'flex-end',
@@ -110,9 +120,9 @@ sectionHeader: {
   padding: 10,
 },
 headingSection:{
-  justifyContent:'flex-start',
-  alignItems:'flex-start',
-  flex:2.5
+// justifyContent:'flex-start',
+  // alignItems:'flex-start',
+  bottom:150
 },
 headingText:{
   color:'black',
@@ -120,7 +130,28 @@ headingText:{
   fontSize:16,
   marginLeft:10
   
-}
+},
+gridView1: {
+  flex: 0,
+  position:'relative'
+
+},
+itemContainer1: {
+  justifyContent: 'flex-end',
+  borderRadius: 12,
+  height: 190,
+  
+},
+itemName1: {
+  fontSize: 16,
+  color: '#fff',
+  fontWeight: '600',
+},
+itemCode1: {
+  fontWeight: '600',
+  fontSize: 12,
+  color: '#fff',
+},
 });
 export default function main() {
   const [items, setItems] = React.useState([
@@ -130,9 +161,18 @@ export default function main() {
     
     
   ]);
+  const [item, setItem] = React.useState([
+    { name: 'Chicken Taste to best Hotel', img: require('../../assets/unsplash_nQYALfQKmK4.png') },
+    { name: 'Mughlai Taste in Love Hotel', img: require('../../assets/unsplash_ykThMylLsbY.png') },
+    
+  
+  ]);
+ const  ratingCompleted = (rating) => {
+    console.log("Rating is: " + rating)
+  }
   return (
     <>
-   
+    <View style={{top:0,flexDirection:'row',marginTop:50}}>
     <View style={styles.container1}>
          <Image style={styles.img}  source={require('../../assets/profile.png')} />
 
@@ -140,6 +180,7 @@ export default function main() {
     <View style={styles.container}>
      <Text style={styles.txt}>Hello, Tommy {"\n"}
         What food you want today?</Text>
+    </View>
     </View>
     <SectionGrid
       itemDimension={90}
@@ -172,6 +213,51 @@ export default function main() {
     />
       <View style={styles.headingSection}>
        <Text style={styles.headingText}>Restaurants Near Me</Text>
+       <FlatGrid
+      itemDimension={130}
+      data={item}
+      style={styles.gridView1}
+      // staticDimension={300}
+      // fixed
+      spacing={10}
+      renderItem={({ item }) => (
+        <View style={[styles.itemContainer1, { backgroundColor: "#fff"}]}>
+              <View style={{height:100,backgroundColor:'#fff'}} >
+                <Image style={{width:"100%",height:"100%",objectFit:'cover',borderTopLeftRadius:12,borderTopRightRadius:12}} source={item.img} />
+               
+              </View>
+              <View>
+              <Text style={styles.cardTxt2}>
+                    {item.name}
+                  </Text>
+                  <Rating
+                    imageSize={20}
+                    minValue={2.5}
+                    onFinishRating={ratingCompleted}
+                    style={{
+                      paddingVertical: 10,
+                      justifyContent: 'flex-start',
+                      alignItems: 'flex-start',
+                      marginLeft:5
+                    }}
+                  />
+                   <TouchableOpacity>
+                    <Text
+                      style={{
+                        fontSize: 13,
+                        fontWeight: 'bold',
+                        marginLeft: 10,
+                        padding:0,
+                        bottom:5
+                      }}>
+                      See more
+                    </Text>
+                  </TouchableOpacity>
+              </View>
+ 
+        </View>
+      )}
+    />
       </View>
     </>
   );
