@@ -8,7 +8,10 @@ export default function logout(props) {
     // while(props.navigation.canGoBack()){
     //   props.navigation.pop();
     // }
-    props.navigation.navigate('login');
+    props.navigation.reset({
+      index: 0,
+      routes: [{ name: 'login' }],
+    })
   }
 
   return (

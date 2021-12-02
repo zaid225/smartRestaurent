@@ -10,7 +10,7 @@ import logout from '../logout/logout';
 const Tab = createBottomTabNavigator();
 
 export default function home(props) {
-  console.log("props", props)
+  console.log("props", props.navigation)
   return (
     <Tab.Navigator
       initialRouteName="Feed"
